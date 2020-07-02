@@ -1,0 +1,9 @@
+.DS_Store
+.tags
+.tags1
+nRF5_SDK_17.0.0_9d13099.zip
+nRF5_SDK_17.0.0_9d13099/
+_build/
+*.hex
+*.eww
+*.gch
