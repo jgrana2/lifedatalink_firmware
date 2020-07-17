@@ -2,17 +2,18 @@ extern "C"{
   #include "nrf_drv_spi.h"
 }
 
-#include <stdint.h> //For uint8_t
+#include <stdint.h> /**< For uint8_t */
 
 class LED {
 public:
   char color[6];
   static volatile inline bool spi_xfer_done = false;  /**< Flag used to indicate that SPI instance completed the transfer. */
-  LED();
-  void led_spi_init();
-  void set_color(const char color[6]);
-  void led_spi_send(uint8_t *color);
-  static void led_spi_event_handler(nrf_drv_spi_evt_t const * p_event, void *p_context);
-};
+  static const inline nrf_drv_spi_t spi = NRF_DRV_SPI_INSTANCE(0);  /**< SPI instance. */
+  static inline uint16_t m_tx_buf[300] = { 0 };;
 
-// inline bool LED::spi_xfer_done = false;
+  LED();
+  void spi_init();
+  void set_color(uint32_t color);
+  void spi_send(uint8_t *color);
+  static void spi_event_handler(nrf_drv_spi_evt_t const * p_event, void *p_context);
+};
